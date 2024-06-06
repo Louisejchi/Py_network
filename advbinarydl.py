@@ -8,13 +8,13 @@ from ftplib import FTP
 f = FTP('10.22.21.56')
 f.login()
 
-f.cwd('/pub/louisefile')
+f.cwd('/pub/class')
 f.voidcmd("TYPE I")
 
-datasock, size = f.ntransfercmd("RETR remote_file.txt")
+datasock, size = f.ntransfercmd("RETR download_file.txt")
 bytes_so_far = 0
 # print(datasock)
-with open('remote_file.txt', 'wb') as fd:
+with open('download_file.txt', 'wb') as fd:
     while 1:
         buf = datasock.recv(2048)
         if not buf:
@@ -29,7 +29,8 @@ with open('remote_file.txt', 'wb') as fd:
             print("bytes", end=' ')
         sys.stdout.flush()
 
-print()
+        # print(buf.decode())
+
 datasock.close()
 f.voidresp()
 f.quit()
